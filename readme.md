@@ -69,7 +69,24 @@ prevent out-site using by referer restriction.__CAUTION:It cannot recognize fake
 	//xhr.send();
 	//with referer http://localhost:8000/anywhere.html
 
+###other options
+
+#### suppressHostNameOnRequest(bool)
+
+	default or false:
+		GET http://localhost/path HTTP/1.0
+					.
+					.
+
+	true:
+		GET /path HTTP/1.0
+					.
+					.
+
 ##Running unit tests
 
 	$npm test
 
+##History
+
+0.1.0: Adds option suppressHostNameOnRequest.

@@ -25,6 +25,7 @@ module.exports = function ( options ) {
     var pattern = new RegExp("^\/" + prefix + "\/");
 	var referer=options&&options.referer||null;
 	var acao=options&&options.acao||null;
+	var suppressHostNameOnRequest=options&&options.suppressHostNameOnRequest||false
 
 	if(acao!=null){
 		var over=function(req,res,response){
@@ -47,7 +48,7 @@ module.exports = function ( options ) {
             parsedUrl = url.parse(backendUrl);
         }
 
-        req.url = backendUrl;
+        req.url = suppressHostNameOnRequest?parsedUrl.path:backendUrl;
         req.headers.host = parsedUrl.host;
 		
         if(parsedUrl.protocol !== "https:"){

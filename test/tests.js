@@ -3,7 +3,8 @@ var assert    = require('assert'),
     connect   = require('connect'),
     http      = require('http'),
     request   = require('request'),
-    url       = require("url");
+    url       = require("url"),
+	util      = require('util');
 
 
 describe('xhr2proxy', function () {
@@ -18,6 +19,15 @@ describe('xhr2proxy', function () {
                     res.end("response from remote");
             })
             .listen(9000);
+        connect()
+            .use(function ( req, res ) {
+                var query = url.parse(req.url).query;
+                if (query)
+                    res.end(query);
+                else
+                    res.end(req.url);
+            })
+            .listen(9001);
     });
 
     describe('with default settings', function () {
@@ -160,6 +170,41 @@ describe('xhr2proxy', function () {
                     assert.ok(!err);
                     assert.equal(res.statusCode, 200);
                     assert.equal(body, "response from remote");
+                    done();
+                });
+        });
+
+    });
+
+    describe('with misc settings', function () {
+
+        before(function () {
+            connect()
+                .use(xhr2proxy({suppressHostNameOnRequest:true}))
+                .use(function ( req, res ) {
+                    res.end("Hello from Connect!");
+                })
+                .listen(8004);
+        });
+
+        it('should suppress hostname on request', function ( done ) {
+
+            request
+                .get('http://localhost:8004/proxy/http://localhost:9001', function ( err, res, body ) {
+                    assert.ok(!err);
+                    assert.equal(res.statusCode, 200);
+                    assert.equal(body, "/");
+                    done();
+                });
+        });
+
+        it('should not suppress hostname on request without option', function ( done ) {
+
+            request
+                .get('http://localhost:8000/proxy/http://localhost:9001', function ( err, res, body ) {
+                    assert.ok(!err);
+                    assert.equal(res.statusCode, 200);
+                    assert.equal(body, "http://localhost:9001");
                     done();
                 });
         });
