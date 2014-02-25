@@ -2,9 +2,9 @@
   "name": "xhr2proxy",
   "description": "HTTP/HTTPS proxy middleware of connect/express for XHR(XMLHTTPRequest) with referer restriction and appending Access-Control-Allow-Origin for cross domain(CORS) XHR2",
   "main": "index.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
-    "http-proxy": "*"
+    "http-proxy": "0.10.3"
   },
   "devDependencies": {
     "mocha": "*",
@@ -26,6 +26,6 @@
   },
   "license": "MIT",
   "readmeFilename": "readme.md",
-  "_id": "xhr2proxy@0.1.0",
+  "_id": "xhr2proxy@0.1.1",
   "_from": "xhr2proxy"
 }
