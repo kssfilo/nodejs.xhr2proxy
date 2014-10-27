@@ -2,9 +2,13 @@
   "name": "xhr2proxy",
   "description": "HTTP/HTTPS proxy middleware of connect/express for XHR(XMLHTTPRequest) with referer restriction and appending Access-Control-Allow-Origin for cross domain(CORS) XHR2",
   "main": "index.js",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "dependencies": {
     "http-proxy": "0.10.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kssfilo/nodejs.xhr2proxy"
   },
   "devDependencies": {
     "mocha": "*",
@@ -26,6 +30,6 @@
   },
   "license": "MIT",
   "readmeFilename": "readme.md",
-  "_id": "xhr2proxy@0.1.1",
+  "_id": "xhr2proxy@0.1.4",
   "_from": "xhr2proxy"
 }
